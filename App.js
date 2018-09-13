@@ -9,6 +9,8 @@ import rootSaga, {getUserData} from './src/sagas/saga';
 import NavigationService from './NavigationService';
 
 import HomeScreen from './src/components/HomeScreen';
+import Questionnaires from './src/components/Questionnaires';
+import Questions from './src/components/Questions';
 import Knock from './src/components/Knock';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -24,6 +26,8 @@ sagaMiddleware.run(getUserData);
 const RootStack = createStackNavigator({
   Home: HomeScreen,
   Knock: Knock,
+  Questionnaires: Questionnaires,
+  Questions: Questions,
 },
 {
   initialRouteName: 'Home',
