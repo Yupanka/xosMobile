@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Platform, StyleSheet, Text, View, Button, SectionList} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, SectionList, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import { getQuestionList } from '../actions/actions';
 import { styles } from './styles';
+import ErrorAlert from './ErrorAlert'
 
 class Questionnaires extends React.Component {
+  static navigationOptions = {
+    title: "Questionnaires",
+  };
   
   render() {
     return (
+      <View>
       <SectionList
         renderItem={({item, index, section}) => <Button key={index} title={item.name} onPress={(e) => this.props.getQuestionList(item.id, e)}/>}
         renderSectionHeader={({section: {title}}) => (
@@ -20,7 +25,12 @@ class Questionnaires extends React.Component {
           {title: 'Monthly', data: this.props.questionnaires.filter((el) => el.type === 'monthly').map((q, key) => q)},
         ]}
         keyExtractor={(item, index) => item + index}
+        ListEmptyComponent={() => <Text>Sorry, we found nothing</Text>}
       />
+<TouchableOpacity onPress = {(e) =>{e.preventDefault(); ErrorAlert("OOPS")}} style = {styles.button}>
+         <Text>Alert</Text>
+      </TouchableOpacity>
+      </View>
     );
   }
 }

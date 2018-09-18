@@ -12,6 +12,7 @@ import HomeScreen from './src/components/HomeScreen';
 import Questionnaires from './src/components/Questionnaires';
 import Questions from './src/components/Questions';
 import Knock from './src/components/Knock';
+import Header from './src/components/Header';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -31,6 +32,16 @@ const RootStack = createStackNavigator({
 },
 {
   initialRouteName: 'Home',
+  navigationOptions: ({navigation}) => ({
+      headerTitle: navigation.state.routeName,
+      headerStyle: {
+        backgroundColor: 'red',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }),
 });
 
 export default class App extends React.Component {
