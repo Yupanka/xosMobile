@@ -8,7 +8,8 @@ import { styles } from './styles';
 class HomeScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+      
         <Text style={styles.welcome}>Welcome, {this.props.username}</Text>
         {(this.props.userrole && this.props.userrole === 'General Manager') ?
         (<Button

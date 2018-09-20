@@ -22,6 +22,8 @@ class Questions extends React.Component {
     )
   }
 }
+// onpress on answer appears picker. Picker shows options from the props passed to it by parent. On select it executes function passed from parent
+// then what - does it hide? or it hides on click on the parent? or on focus loss?
 
 Questions.propTypes = {
   questionnaire: PropTypes.object.isRequired,

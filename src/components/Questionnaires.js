@@ -1,37 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Platform, StyleSheet, Text, View, Button, SectionList, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, View, Button, SectionList, TouchableOpacity, FlatList} from 'react-native';
 import { connect } from 'react-redux';
 import { getQuestionList } from '../actions/actions';
 import { styles } from './styles';
 import ErrorAlert from './ErrorAlert'
+import HeaderComponent from './HeaderComponent';
+import { BottomNavigation, Text } from 'react-native-paper';
+import QuestTabView from './QuestTabView';
 
 class Questionnaires extends React.Component {
-  static navigationOptions = {
-    title: "Questionnaires",
+  constructor(props) {
+    super(props);
+    this.filteredQuestionnaires = this.filteredQuestionnaires.bind(this);
+  }
+
+  static navigationOptions = ({ navigation, screenProps }) => {
+    return {
+      header: ({state}) => <HeaderComponent 
+          title={navigation.state.params ? navigation.state.params.title : ''} 
+          />
+        }
   };
+
+  filteredQuestionnaires(data) {
+    return (<FlatList
+      data={data}
+      renderItem={({item, index}) => <Button title={item.name} onPress={(e) => this.props.getQuestionList(item.id, e)}/>}
+      keyExtractor={(item, index) => index.toString()}
+    />)
+  }
+
+  componentDidMount() {
+    let screenTitle;
+    if (this.props.userrole === 'General Manager') {
+      screenTitle = "GM Questionnaire";
+    } else {
+      screenTitle = "GEMBA Walk";
+    }
+
+    this.props.navigation.setParams({
+      title: screenTitle
+    })
+  }
   
   render() {
-    return (
-      <View>
-      <SectionList
-        renderItem={({item, index, section}) => <Button key={index} title={item.name} onPress={(e) => this.props.getQuestionList(item.id, e)}/>}
-        renderSectionHeader={({section: {title}}) => (
-          <Text style={{fontWeight: 'bold'}}>{title}</Text>
-        )}
-        sections={[
-          {title: 'Daily', data: this.props.questionnaires.filter((el) => el.type === 'daily').map((q, key) => q)},
-          {title: 'Weekly', data: this.props.questionnaires.filter((el) => el.type === 'weekly').map((q, key) => q)},
-          {title: 'Monthly', data: this.props.questionnaires.filter((el) => el.type === 'monthly').map((q, key) => q)},
-        ]}
-        keyExtractor={(item, index) => item + index}
-        ListEmptyComponent={() => <Text>Sorry, we found nothing</Text>}
-      />
-<TouchableOpacity onPress = {(e) =>{e.preventDefault(); ErrorAlert("OOPS")}} style = {styles.button}>
-         <Text>Alert</Text>
-      </TouchableOpacity>
-      </View>
-    );
+    return ( <QuestTabView 
+      daily={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'daily'))}
+      weekly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'weekly'))}
+      monthly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'monthly'))}
+     /> )
   }
 }
 

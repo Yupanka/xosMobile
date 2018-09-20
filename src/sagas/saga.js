@@ -9,7 +9,9 @@ export function* getUserData() {
 	try {
 		console.log('trying')
 		//TODO: instead of my local mockserver, call the real api
-		const response = yield call(fetch, 'http://10.105.188.189:3004/users/2', {credentials: 'include'});
+	//	const response = yield call(fetch, 'http://10.105.188.189:3004/users/2', {credentials: 'include'});
+				const response = yield call(fetch, 'http://localhost:3004/users/1', {credentials: 'include'});
+
 		if (response && response.status === 200) {
 			const data = yield call([response, response.json]);
 			yield put({type: 'GET_USER_DATA_SUCCESS', data});
@@ -24,7 +26,9 @@ export function* getUserData() {
 function* getQuestionnaires(action) {
 	try {
 		//TODO: instead of my local mockserver, call the real api
-		const response = yield call(fetch, `http://10.105.188.189:3004/questionnaires?role=${action.data}`, {credentials: 'include'});
+	//	const response = yield call(fetch, `http://10.105.188.189:3004/questionnaires?role=${action.data}`, {credentials: 'include'});
+				const response = yield call(fetch, `http://localhost:3004/questionnaires?role=${action.data}`, {credentials: 'include'});
+
 		if (response && response.status === 200) {
 			const data = yield call([response, response.json]);
 			yield put({type: 'GET_QUESTIONNAIRES_SUCCESS', data});
@@ -44,7 +48,9 @@ function* getQuestions(action) {
 	
 		let data;
 		//TODO: instead of my local mockserver, call the real api
-  		const response = yield call(fetch, `http://10.105.188.189:3004/questions/${action.questionnaire}`);
+  	//	const response = yield call(fetch, `http://10.105.188.189:3004/questions/${action.questionnaire}`);
+  		  		const response = yield call(fetch, `http://localhost:3004/questions/${action.questionnaire}`);
+
   		if (response && response.status === 200) {
   			const resp = yield call([response, response.json]);
 			const normalizedData = normalize(resp, questionListSchema);
@@ -67,7 +73,9 @@ function* submitAnswer(action) {
 		const payload = denormalize(answered.result, questionListSchema, answered);
 
 		const res = yield call(fetch, 
-			`http://http://10.105.188.189:3004/questions/${answered.id}`, 
+		//	`http://http://10.105.188.189:3004/questions/${answered.id}`, 
+			`http://localhost:3004/questions/${answered.id}`, 
+
 			{method: 'PUT', 
 			credentials: 'include',
 			headers: {
@@ -80,7 +88,9 @@ function* submitAnswer(action) {
 		if (!res || res.status !== 200) {
 			// if couldn't submit the answer, try to load latest version of questions from api
 			console.log('Something went wrong');
-			const response = yield call(fetch, `http://10.105.188.189:3004/questions/${answered.id}`);
+//			const response = yield call(fetch, `http://10.105.188.189:3004/questions/${answered.id}`);
+			const response = yield call(fetch, `http://localhost:3004/questions/${answered.id}`);
+
 	  		if (response && response.status === 200) {
 	  			const resp = yield call([response, response.json]);
 					const normalizedData = normalize(resp, questionListSchema);
