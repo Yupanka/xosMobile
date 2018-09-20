@@ -9,13 +9,13 @@ export const loadQuestionnaires = data => ({
 });
 
 export const getQuestionnairesSuccess = data => ({
-	type: 'GET_QUESTIONNAIRES_SUCCESS',
-	data
+  type: 'GET_QUESTIONNAIRES_SUCCESS',
+  data
 });
 
 export const getQuestionnairesError = (data) => ({
-	type: 'GET_QUESTIONNAIRES_ERROR',
-	data
+  type: 'GET_QUESTIONNAIRES_ERROR',
+  data
 });
 
 export const saveQuestionnaire = data => ({
@@ -24,28 +24,27 @@ export const saveQuestionnaire = data => ({
 });
 
 export const getUserDataSuccess = data => ({
-	type: 'GET_USER_DATA_SUCCESS',
-	data
+  type: 'GET_USER_DATA_SUCCESS',
+  data
 });
 
 export const answerQuestion = (question, answer) => ({
-	type: 'ANSWER_QUESTION',
-	question,
-	answer
+  type: 'ANSWER_QUESTION',
+  question,
+  answer
 });
 
 export const getQuestionList = (questionnaire) => ({
-	type: 'GET_QUESTION_LIST',
-	questionnaire
+  type: 'GET_QUESTION_LIST',
+  questionnaire
 });
 
 export const getQuestionListSuccess = (data) => ({
-	type: 'GET_QUESTIONS_SUCCESS',
-	data
+  type: 'GET_QUESTIONS_SUCCESS',
+  data
 });
 
 export const getQuestionListError = (data) => ({
-	type: 'GET_QUESTIONS_ERROR',
-	data
+  type: 'GET_QUESTIONS_ERROR',
+  data
 });
-

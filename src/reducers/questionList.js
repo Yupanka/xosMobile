@@ -6,31 +6,32 @@ const initialState = {
 };
 
 const questionList = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'GET_QUESTION_LIST':
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case 'GET_QUESTIONS_SUCCESS':
       return {
         ...state,
         loading: false,
-        ...action.data,
+        ...action.data
       };
     case 'GET_QUESTIONS_ERROR':
       return {
         state: initialState
       };
 
-    case 'ANSWER_QUESTION':
-      const qs = { ...state.questions};
+    case 'ANSWER_QUESTION': {
+      const qs = { ...state.questions };
       const answered = { ...qs[action.question], answer: action.answer };
 
       return {
         ...state,
-        questions: {...state.questions, [action.question]: answered}
+        questions: { ...state.questions, [action.question]: answered }
       };
+    }
 
     default:
       return state;

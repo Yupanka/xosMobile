@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './src/reducers/rootReducer';
-import rootSaga, {getUserData} from './src/sagas/saga';
+import rootSaga, { getUserData } from './src/sagas/saga';
 import NavigationService from './NavigationService';
-
 import HomeScreen from './src/components/HomeScreen';
 import Questionnaires from './src/components/Questionnaires';
 import Questions from './src/components/Questions';
@@ -23,34 +21,34 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 sagaMiddleware.run(getUserData);
 
-
 const RootStack = createStackNavigator({
   Home: HomeScreen,
-  Knock: Knock,
-  Questionnaires: Questionnaires,
-  Questions: Questions,
+  Knock,
+  Questionnaires,
+  Questions
 },
 {
   initialRouteName: 'Home',
-  navigationOptions: ({navigation}) => ({
-      header: <HeaderComponent title={navigation.state.routeName} />,
-      headerStyle: {
-        backgroundColor: 'red',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }),
+  navigationOptions: ({ navigation }) => ({
+    header: <HeaderComponent title={navigation.state.routeName} />,
+    headerStyle: {
+      backgroundColor: 'red'
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  })
 });
 
 export default class App extends React.Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
-        <RootStack ref={navigatorRef => {
+        <RootStack ref={(navigatorRef) => {
           NavigationService.setTopLevelNavigator(navigatorRef);
-        }}/>
+        }}
+        />
       </Provider>
     );
   }

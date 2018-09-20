@@ -5,22 +5,22 @@ const initialState = {
 };
 
 const questionnaires = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'LOAD_QUESTIONNAIRES':
       return {
         ...state,
         loading: true
       };
-      case 'GET_QUESTIONNAIRES_SUCCESS':
-        return {
-          ...state,
-          loading: false,
-          questionnaires: action.data
-        };
-      case 'GET_QUESTIONNAIRES_ERROR':
-        return {
-          state: initialState
-        };
+    case 'GET_QUESTIONNAIRES_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        questionnaires: action.data
+      };
+    case 'GET_QUESTIONNAIRES_ERROR':
+      return {
+        state: initialState
+      };
     default:
       return state;
   }

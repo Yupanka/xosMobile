@@ -6,7 +6,7 @@ import questionList from './questionList';
 const rootReducer = combineReducers({
   questionnaires: questionnaires,
   user: user,
-  questionList: questionList,
+  questionList: questionList
 });
 
 export default rootReducer;
