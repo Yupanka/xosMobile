@@ -23,6 +23,7 @@ class Answer extends React.Component {
       <FlatList
         data={answerOpt.map((a, key) => a)}
         renderItem={({ item }) => <Button key={item} title={item} onPress={(e) => this.handleAnswer(item, e)} />}
+        keyExtractor={(item, index) => index.toString()}
       />
     );
   }

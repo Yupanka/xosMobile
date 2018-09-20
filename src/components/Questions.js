@@ -11,7 +11,8 @@ class Questions extends React.Component {
   render () {
     return (
       <FlatList
-        data={this.props.questionnaire.questions.map((q, key) => q)}
+        keyExtractor={(item, index) => index.toString()}
+        data={this.props.questionnaire.questions}
         renderItem={({ item }) => <View>
           <Text>{item.question}</Text>
           <Text>{item.answer}</Text>
