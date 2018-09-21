@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { answerQuestion } from '../actions/actions';
+import { answerQuestion } from '../../actions/actions';
 // import { styles } from './styles';
-import { getQuestions } from '../selectors/selectors';
+import { getQuestions } from '../../selectors/selectors';
 import Answer from './Answer';
 
 class Questions extends React.Component {

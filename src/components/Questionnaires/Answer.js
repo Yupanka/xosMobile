@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, FlatList, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { answerQuestion } from '../actions/actions';
+import { answerQuestion } from '../../actions/actions';
 // import { styles } from './styles';
 
 class Answer extends React.Component {

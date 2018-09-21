@@ -2,24 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { getQuestionList } from '../actions/actions';
+import { getQuestionList } from '../../actions/actions';
 // import { styles } from './styles';
 // import HeaderComponent from './HeaderComponent';
-import QuestTabView from './QuestTabView';
+import QuestTabView from '../ui-components/QuestTabView';
 
 class Questionnaires extends React.Component {
   constructor (props) {
     super(props);
     this.filteredQuestionnaires = this.filteredQuestionnaires.bind(this);
   }
-
-  // static navigationOptions = ({ navigation, screenProps }) => {
-  //   return {
-  //     header: ({ state }) => <HeaderComponent
-  //       title={navigation.state.params ? navigation.state.params.title : ''}
-  //     />
-  //   };
-  // };
 
   filteredQuestionnaires (data) {
     return (<FlatList

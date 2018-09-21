@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, Button } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadQuestionnaires } from '../actions/actions';
-import { styles } from './styles';
+import { loadQuestionnaires } from '../../actions/actions';
+import { styles } from './../styles';
 
 class HomeScreen extends React.Component {
   render () {

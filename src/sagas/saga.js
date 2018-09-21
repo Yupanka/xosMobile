@@ -3,7 +3,7 @@ import { normalize, denormalize } from 'normalizr';
 import NavigationService from '../../NavigationService.js';
 import { questionListSchema } from '../api/schemas';
 import { returnState } from '../selectors/selectors';
-import ErrorAlert from '../components/ErrorAlert';
+import ErrorAlert from '../components/ui-components/ErrorAlert';
 
 export function * getUserData () {
   try {

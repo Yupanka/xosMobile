@@ -6,11 +6,11 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from './src/reducers/rootReducer';
 import rootSaga, { getUserData } from './src/sagas/saga';
 import NavigationService from './NavigationService';
-import HomeScreen from './src/components/HomeScreen';
-import Questionnaires from './src/components/Questionnaires';
-import Questions from './src/components/Questions';
+import HomeScreen from './src/components/Home/HomeScreen';
+import Questionnaires from './src/components/Questionnaires/Questionnaires';
+import Questions from './src/components/Questionnaires/Questions';
 import Knock from './src/components/Knock';
-import HeaderComponent from './src/components/HeaderComponent';
+import HeaderComponent from './src/components/ui-components/HeaderComponent';
 
 const sagaMiddleware = createSagaMiddleware();
 
