@@ -5,7 +5,7 @@ import { Appbar } from 'react-native-paper';
 import { connect } from 'react-redux';
 // import { styles } from './styles';
 import HeaderSearch from './HeaderSearch';
-import NavigationService from '../../../NavigationService.js';
+import NavigationService from '../../NavigationService.js';
 
 class HeaderComponent extends React.Component {
   constructor (props) {

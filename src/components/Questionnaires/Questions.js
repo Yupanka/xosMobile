@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { answerQuestion } from '../../actions/actions';
 // import { styles } from './styles';
 import { getQuestions } from '../../selectors/selectors';
-import Answer from './Answer';
+import Question from './Question';
 
 class Questions extends React.Component {
   componentDidMount () {
@@ -19,17 +19,11 @@ class Questions extends React.Component {
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={this.props.questionnaire.questions}
-        renderItem={({ item }) => <View>
-          <Text>{item.question}</Text>
-          <Text>{item.answer}</Text>
-          <Answer question={item} />
-        </View>}
+        renderItem={({ item }) => <Question item={item} />}
       />
     );
   }
 }
-// onpress on answer appears picker. Picker shows options from the props passed to it by parent. On select it executes function passed from parent
-// then what - does it hide? or it hides on click on the parent? or on focus loss?
 
 Questions.propTypes = {
   questionnaire: PropTypes.object.isRequired,

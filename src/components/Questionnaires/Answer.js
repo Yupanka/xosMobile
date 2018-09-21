@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, FlatList, TextInput } from 'react-native';
+import { TextInput, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import { answerQuestion } from '../../actions/actions';
 // import { styles } from './styles';
 
 class Answer extends React.Component {
-  handleAnswer = (answer, e) => {
+  handleAnswerType = (answer, e) => {
     const question = this.props.question.id;
     e.preventDefault();
+    this.props.answerQuestion(question, answer);
+  }
+
+  handleAnswerSelect = (answer) => {
+    const question = this.props.question.id;
     this.props.answerQuestion(question, answer);
   }
 
@@ -17,14 +22,14 @@ class Answer extends React.Component {
     return this.props.question.answerType === 'string' ? (
       <TextInput multiline
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onEndEditing={(e) => this.handleAnswer(e.nativeEvent.text, e)}
+        onEndEditing={(e) => this.handleAnswerType(e.nativeEvent.text, e)}
       />
     ) : (
-      <FlatList
-        data={answerOpt.map((a, key) => a)}
-        renderItem={({ item }) => <Button key={item} title={item} onPress={(e) => this.handleAnswer(item, e)} />}
-        keyExtractor={(item, index) => index.toString()}
-      />
+      <Picker
+        selectedValue={this.props.question.answer}
+        onValueChange={(val) => this.handleAnswerSelect(val)}>
+        {answerOpt.map((a, key) => <Picker.Item key={key} label={a} value={a} />)}
+      </Picker>
     );
   }
 }

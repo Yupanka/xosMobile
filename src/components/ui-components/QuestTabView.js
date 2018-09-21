@@ -21,7 +21,6 @@ export default class QuestTabView extends React.Component {
   });
 
   render () {
-    console.log(typeof (this.props.daily));
     return (
       <BottomNavigation
         navigationState={this.state}

@@ -4,7 +4,6 @@ import Knock from './Knock';
 
 describe('Knock', () => {
   it('renders as expected', () => {
-    console.log('shallow');
     const wrapper = shallow(
       <Knock />
     );

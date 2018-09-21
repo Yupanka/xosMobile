@@ -55,6 +55,6 @@
     "transform": {
       "^.+\\.js$": "./node_modules/react-native/jest/preprocessor.js"
     },
-    "setupTestFrameworkScriptFile": "./setupTests.js"
+    "setupTestFrameworkScriptFile": "./src/setupTests.js"
   }
 }
