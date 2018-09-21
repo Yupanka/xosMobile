@@ -30,7 +30,7 @@ const RootStack = createStackNavigator({
 {
   initialRouteName: 'Home',
   navigationOptions: ({ navigation }) => ({
-    header: <HeaderComponent title={navigation.state.routeName} />,
+    header: <HeaderComponent title={navigation.state.params ? navigation.state.params.title : navigation.state.routeName} />,
     headerStyle: {
       backgroundColor: 'red'
     },

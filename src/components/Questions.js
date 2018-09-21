@@ -8,6 +8,12 @@ import { getQuestions } from '../selectors/selectors';
 import Answer from './Answer';
 
 class Questions extends React.Component {
+  componentDidMount () {
+    this.props.navigation.setParams({
+      title: this.props.questionnaire.name
+    });
+  }
+
   render () {
     return (
       <FlatList
@@ -27,11 +33,13 @@ class Questions extends React.Component {
 
 Questions.propTypes = {
   questionnaire: PropTypes.object.isRequired,
-  match: PropTypes.object
+  match: PropTypes.object,
+  navigation: PropTypes.object
 };
 
 Questions.defaultProps = {
-  questionnaire: {}
+  questionnaire: {},
+  navigation: { setParams: () => {} }
 };
 
 const mapStateToProps = state => ({

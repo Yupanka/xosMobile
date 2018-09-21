@@ -4,7 +4,7 @@ import { Button, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { getQuestionList } from '../actions/actions';
 // import { styles } from './styles';
-import HeaderComponent from './HeaderComponent';
+// import HeaderComponent from './HeaderComponent';
 import QuestTabView from './QuestTabView';
 
 class Questionnaires extends React.Component {
@@ -13,13 +13,13 @@ class Questionnaires extends React.Component {
     this.filteredQuestionnaires = this.filteredQuestionnaires.bind(this);
   }
 
-  static navigationOptions = ({ navigation, screenProps }) => {
-    return {
-      header: ({ state }) => <HeaderComponent
-        title={navigation.state.params ? navigation.state.params.title : ''}
-      />
-    };
-  };
+  // static navigationOptions = ({ navigation, screenProps }) => {
+  //   return {
+  //     header: ({ state }) => <HeaderComponent
+  //       title={navigation.state.params ? navigation.state.params.title : ''}
+  //     />
+  //   };
+  // };
 
   filteredQuestionnaires (data) {
     return (<FlatList
@@ -32,7 +32,7 @@ class Questionnaires extends React.Component {
   componentDidMount () {
     let screenTitle;
     if (this.props.userrole === 'General Manager') {
-      screenTitle = 'GM Questionnaire';
+      screenTitle = 'GM Questionnaires';
     } else {
       screenTitle = 'GEMBA Walk';
     }
