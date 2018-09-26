@@ -103,8 +103,96 @@ function * submitAnswer (action) {
   }
 }
 
+export function * handleUpload () {
+  try {
+    // TODO: instead of my local mockserver, call the real api
+
+    // '/Users/npavlova/Library/Developer/CoreSimulator/Devices/707183AA-DD18-42B3-A05C-B61775135132/data/Media/DCIM/100APPLE/cup.jpg',
+    const file = {
+      uri: '/Users/npavlova/Downloads/cup.jpg',
+      type: 'image/jpeg',
+      name: 'cup.jpg'
+    };
+
+    yield put({ type: 'ADD_UPLOADED', file });
+
+    // const data = new FormData();
+    // data.append('name', 'testName');
+    // data.append('photo', file);
+    // console.log('this is data', data);
+    // const response = yield call(fetch, 'http://localhost:3004/actions',
+    //   { method: 'POST',
+    //     credentials: 'include',
+    //     body: data
+    //   });
+
+    // if (response && response.ok) {
+    //   const data = yield call([response, response.json]);
+    //   console.log(data);
+    //   //yield put({ type: 'GET_USER_DATA_SUCCESS', data });
+    // } else {
+    //   console.log('something else happened:: ', response)
+    // }
+  } catch (err) {
+    console.log('in ELSE', err);
+  }
+}
+
+function * handleSubmitAction (action) {
+  try {
+    const st = yield select(returnState);
+    const actionData = st.assignAction;
+    const photos = actionData.attachments;
+    const data = new FormData();
+
+    photos.forEach((photo) => {
+      data.append('photo', {
+        uri: photo.uri,
+        type: 'image/jpeg', // or photo.type
+        name: photos.name
+      });
+    });
+
+    data.append('subject', actionData.subject.value);
+    data.append('assignee', actionData.assignee.value);
+    data.append('body', actionData.body.value);
+
+    console.log('this is data', data);
+
+    const res = yield call(fetch,
+      //  `http://http://10.105.188.189:3004/actions`,
+      'http://localhost:3004/actions',
+
+      { method: 'POST',
+        credentials: 'include',
+        /// mock only accepts json, so I leave it like this for now
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        // headers: {
+        //   'Accept': 'multipart/form-data',
+        //   'Content-Type': 'multipart/form-data'
+        // },
+        body: JSON.stringify(data)
+      });
+
+    if (res && res.ok) {
+      const data = yield call([res, res.json]);
+      console.log(data);
+    }
+    //    const response = yield call(fetch, `http://10.105.188.189:3004/questions/${answered.id}`);
+
+    // }
+  } catch (err) {
+    yield call(ErrorAlert, err.message);
+  }
+}
+
 export default function * rootSaga () {
   yield takeEvery('LOAD_QUESTIONNAIRES', getQuestionnaires);
   yield takeEvery('GET_QUESTION_LIST', getQuestions);
   yield takeEvery('ANSWER_QUESTION', submitAnswer);
+  yield takeEvery('UPLOAD', handleUpload);
+  yield takeEvery('SUBMIT_ACTION', handleSubmitAction);
 }

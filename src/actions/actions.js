@@ -48,3 +48,26 @@ export const getQuestionListError = (data) => ({
   type: 'GET_QUESTIONS_ERROR',
   data
 });
+
+export const changeFieldValue = (data) => ({
+  type: 'CHANGE_VALUE',
+  data
+});
+
+export const validateField = (field) => ({
+  type: 'VALIDATE_FIELD',
+  field
+});
+
+export const upload = () => ({
+  type: 'UPLOAD'
+});
+
+export const addUploadedFile = (file) => ({
+  type: 'ADD_UPLOADED',
+  file
+});
+
+export const submitAction = () => ({
+  type: 'SUBMIT_ACTION'
+});

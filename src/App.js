@@ -11,7 +11,7 @@ import HomeScreen from './components/Home/HomeScreen';
 import Questionnaires from './components/Questionnaires/Questionnaires';
 import Questions from './components/Questionnaires/Questions';
 import Knock from './components/Knock';
-import Form from './components/form';
+import Action from './components/Action';
 import HeaderComponent from './components/ui-components/HeaderComponent';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -28,7 +28,7 @@ const RootStack = createStackNavigator({
   Knock,
   Questionnaires,
   Questions,
-  Form
+  Action
 },
 {
   initialRouteName: 'Home',

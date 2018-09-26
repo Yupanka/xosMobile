@@ -22,12 +22,12 @@ class HomeScreen extends React.Component {
             />
             <Button
               title="Risk Items"
-              onPress={() => this.props.navigation.navigate('Form')}
+              onPress={() => this.props.navigation.navigate('Knock')}
             />
           </View>)}
         <Button
           title="Assign Action"
-          onPress={() => this.props.navigation.navigate('Knock')}
+          onPress={() => this.props.navigation.navigate('Action')}
         />
         <Button
           title="Give Recognition"
