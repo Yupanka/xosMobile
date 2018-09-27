@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, FlatList } from 'react-native';
+import { Button, FlatList, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { getQuestionList } from '../../actions/actions';
 // import { styles } from './styles';
-// import HeaderComponent from './HeaderComponent';
-import QuestTabView from '../ui-components/QuestTabView';
+import HeaderComponent from '../ui-components/HeaderComponent';
+// import QuestTabView from '../ui-components/QuestTabView';
 
 class Questionnaires extends React.Component {
   constructor (props) {
@@ -35,11 +35,25 @@ class Questionnaires extends React.Component {
   }
 
   render () {
-    return (<QuestTabView
-      daily={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'daily'))}
-      weekly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'weekly'))}
-      monthly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'monthly'))}
-    />);
+    return (
+      <View>
+
+        <HeaderComponent
+          title={this.props.navigation.state.params ? this.props.navigation.state.params.title : this.props.navigation.state.routeName}
+          nav={this.props.navigation.openDrawer}
+        />
+        <Text>Here will be a list of questionnaires filtered by type</Text>
+        {this.props.questionnaires.map((q, key) => <Button title={q.name} key={key} />)}
+
+        {/* <QuestTabView
+          daily={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'daily'))}
+          weekly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'weekly'))}
+          monthly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'monthly'))}
+        /> */}
+
+      </View>
+
+    );
   }
 }
 

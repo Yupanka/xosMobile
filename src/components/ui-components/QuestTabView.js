@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { Button, FlatList, View } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 
 export default class QuestTabView extends React.Component {
@@ -21,6 +22,7 @@ export default class QuestTabView extends React.Component {
   });
 
   render () {
+    console.log('tabview::', this.props.daily);
     return (
       <BottomNavigation
         navigationState={this.state}

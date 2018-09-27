@@ -25,9 +25,8 @@ class HeaderComponent extends React.Component {
           />
           <Appbar.Content
             title={this.props.title}
-            subtitle="Subtitle"
           />
-          <Appbar.Action icon="more-vert" />
+          <Appbar.Action icon="menu" onPress={() => this.props.nav()} />
         </Appbar.Header>
         <HeaderSearch location={this.props.location} area={this.props.area} />
       </View>
@@ -39,14 +38,16 @@ HeaderComponent.propTypes = {
   username: PropTypes.string,
   location: PropTypes.string,
   area: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  nav: PropTypes.func
 };
 
 HeaderComponent.defaultProps = {
   username: '',
   location: '',
   area: '',
-  title: ''
+  title: '',
+  nav: () => {}
 };
 
 const mapStateToProps = (state, ownProps) => ({

@@ -14,6 +14,7 @@ export function * getUserData () {
     if (response && response.status === 200) {
       const data = yield call([response, response.json]);
       yield put({ type: 'GET_USER_DATA_SUCCESS', data });
+      // yield NavigationService.navigate('Questionnaires');
     } else {
       //  redirect to login
     }
@@ -24,12 +25,16 @@ export function * getUserData () {
 
 function * getQuestionnaires (action) {
   try {
+    const st = yield select(returnState);
+    const role = st.user.role;
+    console.log('saga::', role);
     // TODO: instead of my local mockserver, call the real api
     //  const response = yield call(fetch, `http://10.105.188.189:3004/questionnaires?role=${action.data}`, {credentials: 'include'});
-    const response = yield call(fetch, `http://localhost:3004/questionnaires?role=${action.data}`, { credentials: 'include' });
+    const response = yield call(fetch, `http://localhost:3004/questionnaires?role=${role}`, { credentials: 'include' });
 
     if (response && response.status === 200) {
       const data = yield call([response, response.json]);
+      console.log(data);
       yield put({ type: 'GET_QUESTIONNAIRES_SUCCESS', data });
       yield NavigationService.navigate('Questionnaires');
     } else {
@@ -190,7 +195,7 @@ function * handleSubmitAction (action) {
 }
 
 export default function * rootSaga () {
-  yield takeEvery('LOAD_QUESTIONNAIRES', getQuestionnaires);
+  yield takeEvery('GET_USER_DATA_SUCCESS', getQuestionnaires);
   yield takeEvery('GET_QUESTION_LIST', getQuestions);
   yield takeEvery('ANSWER_QUESTION', submitAnswer);
   yield takeEvery('UPLOAD', handleUpload);
