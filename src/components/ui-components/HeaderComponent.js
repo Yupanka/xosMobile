@@ -1,53 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { connect } from 'react-redux';
 // import { styles } from './styles';
-import HeaderSearch from './HeaderSearch';
-import NavigationService from '../../NavigationService.js';
+// import NavigationService from '../../NavigationService.js';
 
 class HeaderComponent extends React.Component {
-  constructor (props) {
-    super(props);
-    this.handleGoBack = this.handleGoBack.bind(this);
-  }
-  handleGoBack (e) {
-    e.preventDefault();
-    NavigationService.goBack();
-  }
+  // constructor (props) {
+  //   super(props);
+  //   this.handleGoBack = this.handleGoBack.bind(this);
+  // }
+  // handleGoBack (e) {
+  //   e.preventDefault();
+  //   NavigationService.goBack();
+  // }
   render () {
     return (
-      <View>
-        <Appbar.Header>
+      <Appbar.Header>
+        {this.props.back &&
           <Appbar.BackAction
-            onPress={this.handleGoBack}
+            onPress={() => this.props.back()}
           />
-          <Appbar.Content
-            title={this.props.title}
-          />
-          <Appbar.Action icon="menu" onPress={() => this.props.nav()} />
-        </Appbar.Header>
-        <HeaderSearch location={this.props.location} area={this.props.area} />
-      </View>
+        }
+        <Appbar.Content
+          title={this.props.title}
+        />
+        <Appbar.Action icon="menu" onPress={() => this.props.nav()} />
+      </Appbar.Header>
     );
   }
 }
 
 HeaderComponent.propTypes = {
   username: PropTypes.string,
-  location: PropTypes.string,
-  area: PropTypes.string,
+  // location: PropTypes.string,
+  // area: PropTypes.string,
   title: PropTypes.string,
-  nav: PropTypes.func
+  nav: PropTypes.func,
+  back: PropTypes.func
 };
 
 HeaderComponent.defaultProps = {
   username: '',
-  location: '',
-  area: '',
+  // location: '',
+  // area: '',
   title: '',
-  nav: () => {}
+  nav: () => {},
+  back: () => {}
 };
 
 const mapStateToProps = (state, ownProps) => ({

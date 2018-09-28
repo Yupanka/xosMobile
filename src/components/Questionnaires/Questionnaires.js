@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, FlatList, View, Text } from 'react-native';
+import { Button, FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
 import { getQuestionList } from '../../actions/actions';
 // import { styles } from './styles';
 import HeaderComponent from '../ui-components/HeaderComponent';
-// import QuestTabView from '../ui-components/QuestTabView';
+import QuestTabView from '../ui-components/QuestTabView';
+import HeaderSearch from '../ui-components/HeaderSearch';
 
 class Questionnaires extends React.Component {
   constructor (props) {
@@ -42,14 +43,8 @@ class Questionnaires extends React.Component {
           title={this.props.navigation.state.params ? this.props.navigation.state.params.title : this.props.navigation.state.routeName}
           nav={this.props.navigation.openDrawer}
         />
-        <Text>Here will be a list of questionnaires filtered by type</Text>
-        {this.props.questionnaires.map((q, key) => <Button title={q.name} key={key} />)}
-
-        {/* <QuestTabView
-          daily={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'daily'))}
-          weekly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'weekly'))}
-          monthly={() => this.filteredQuestionnaires(this.props.questionnaires.filter((el) => el.type === 'monthly'))}
-        /> */}
+        <HeaderSearch location={this.props.location} area={this.props.area} />
+        <QuestTabView questionnaires={this.props.questionnaires} loadQuestions={this.props.getQuestionList} />
 
       </View>
 
@@ -61,18 +56,24 @@ Questionnaires.propTypes = {
   userrole: PropTypes.string,
   questionnaires: PropTypes.array,
   getQuestionList: PropTypes.func,
-  navigation: PropTypes.object
+  navigation: PropTypes.object,
+  location: PropTypes.string,
+  area: PropTypes.string
 };
 
 Questionnaires.defaultProps = {
   userrole: '',
   questionnaires: [],
   getQuestionList: null,
-  navigation: { setParams: () => {} }
+  navigation: { setParams: () => {} },
+  location: '',
+  area: ''
 };
 
 const mapStateToProps = state => ({
   userrole: state.user.role,
+  location: state.user.location,
+  area: state.user.area,
   questionnaires: state.questionnaires.questionnaires
 });
 

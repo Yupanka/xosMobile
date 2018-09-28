@@ -20,7 +20,7 @@ class HeaderSearch extends React.Component {
   render () {
     return (
       <View>
-        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5 }}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5, backgroundColor: '#54535f' }}>
           <Text style={{ color: '#fff' }} onPress={this.toggleHidden}>{this.props.location}</Text>
           <Text style={{ color: '#fff' }} onPress={this.toggleHidden}>{this.props.area}</Text>
         </View>

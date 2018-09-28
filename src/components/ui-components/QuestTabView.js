@@ -1,46 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Button, FlatList, View } from 'react-native';
-import { BottomNavigation } from 'react-native-paper';
+import { Button, FlatList, View } from 'react-native';
+import { List } from 'react-native-paper';
 
 export default class QuestTabView extends React.Component {
-  state = {
-    index: 0,
-    routes: [
-      { key: 'daily', title: 'Daily' },
-      { key: 'weekly', title: 'Weekly' },
-      { key: 'monthly', title: 'Monthly' }
-    ]
-  };
+    state = {
+      active: 'daily'
+    }
 
-  _handleIndexChange = index => this.setState({ index });
-
-  _renderScene = BottomNavigation.SceneMap({
-    daily: this.props.daily,
-    weekly: this.props.weekly,
-    monthly: this.props.monthly
-  });
+  handleFilter = (val, e) => {
+    e.preventDefault();
+    this.setState({ active: val });
+  }
 
   render () {
-    console.log('tabview::', this.props.daily);
+    const q = this.props.questionnaires.filter((quest) => quest.type === this.state.active);
     return (
-      <BottomNavigation
-        navigationState={this.state}
-        onIndexChange={this._handleIndexChange}
-        renderScene={this._renderScene}
-      />
+      <View>
+        <FlatList
+          keyExtractor={(item, index) => index.toString()}
+          data={q}
+          renderItem={({ item }) => <List.Item
+            title={item.name}
+            right={props => <List.Icon {...props} icon="chevron-right" />}
+            onPress={(e) => this.props.loadQuestions(item.id, e)}
+          />}
+        />
+        <Button title="Daily" onPress={(e) => this.handleFilter('daily', e)} />
+        <Button title="Weekly" onPress={(e) => this.handleFilter('weekly', e)} />
+        <Button title="Monthly" onPress={(e) => this.handleFilter('monthly', e)} />
+      </View>
     );
   }
 }
 
 QuestTabView.propTypes = {
-  daily: PropTypes.func,
-  weekly: PropTypes.func,
-  monthly: PropTypes.func
+  questionnaires: PropTypes.array,
+  loadQuestions: PropTypes.func
 };
 
 QuestTabView.defaultProps = {
-  daily: () => {},
-  weekly: () => {},
-  monthly: () => {}
+  questionnaires: [],
+  loadQuestions: () => {}
 };

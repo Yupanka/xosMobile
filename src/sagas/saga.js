@@ -9,7 +9,7 @@ export function * getUserData () {
   try {
     // TODO: instead of my local mockserver, call the real api
     //  const response = yield call(fetch, 'http://10.105.188.189:3004/users/2', {credentials: 'include'});
-    const response = yield call(fetch, 'http://localhost:3004/users/2', { credentials: 'include' });
+    const response = yield call(fetch, 'http://localhost:3004/users/1', { credentials: 'include' });
 
     if (response && response.status === 200) {
       const data = yield call([response, response.json]);
@@ -27,14 +27,12 @@ function * getQuestionnaires (action) {
   try {
     const st = yield select(returnState);
     const role = st.user.role;
-    console.log('saga::', role);
     // TODO: instead of my local mockserver, call the real api
     //  const response = yield call(fetch, `http://10.105.188.189:3004/questionnaires?role=${action.data}`, {credentials: 'include'});
     const response = yield call(fetch, `http://localhost:3004/questionnaires?role=${role}`, { credentials: 'include' });
 
     if (response && response.status === 200) {
       const data = yield call([response, response.json]);
-      console.log(data);
       yield put({ type: 'GET_QUESTIONNAIRES_SUCCESS', data });
       yield NavigationService.navigate('Questionnaires');
     } else {
